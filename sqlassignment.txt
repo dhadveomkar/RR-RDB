@@ -37,6 +37,40 @@ FROM users u
 JOIN progress p ON u.user_id = p.user_id
 WHERE u.email_domain LIKE '%.edu';
 
+9)SELECT u.email_domain,
+       COUNT(CASE WHEN p.learn_cpp = 'completed' THEN 1 END) AS cpp_count,
+       COUNT(CASE WHEN p.learn_sql = 'completed' THEN 1 END) AS sql_count,
+       COUNT(CASE WHEN p.learn_html = 'completed' THEN 1 END) AS html_count,
+       COUNT(CASE WHEN p.learn_javascript = 'completed' THEN 1 END) AS javascript_count,
+       COUNT(CASE WHEN p.learn_java = 'completed' THEN 1 END) AS java_count
+FROM users u
+JOIN progress p ON u.user_id = p.user_id
+WHERE u.email_domain LIKE '%.edu'
+GROUP BY u.email_domain
+ORDER BY cpp_count DESC;
+
+10)SELECT u.city, 
+       COUNT(CASE WHEN p.learn_cpp = 'completed' THEN 1 END) AS cpp_count,
+       COUNT(CASE WHEN p.learn_sql = 'completed' THEN 1 END) AS sql_count,
+       COUNT(CASE WHEN p.learn_html = 'completed' THEN 1 END) AS html_count,
+       COUNT(CASE WHEN p.learn_javascript = 'completed' THEN 1 END) AS javascript_count,
+       COUNT(CASE WHEN p.learn_java = 'completed' THEN 1 END) AS java_count
+FROM users u
+JOIN progress p ON u.user_id = p.user_id
+WHERE LOWER(u.city) = 'new york'
+GROUP BY u.city;
+
+11)SELECT u.city, 
+       COUNT(CASE WHEN p.learn_cpp = 'completed' THEN 1 END) AS cpp_count,
+       COUNT(CASE WHEN p.learn_sql = 'completed' THEN 1 END) AS sql_count,
+       COUNT(CASE WHEN p.learn_html = 'completed' THEN 1 END) AS html_count,
+       COUNT(CASE WHEN p.learn_javascript = 'completed' THEN 1 END) AS javascript_count,
+       COUNT(CASE WHEN p.learn_java = 'completed' THEN 1 END) AS java_count
+FROM users u
+JOIN progress p ON u.user_id = p.user_id
+WHERE LOWER(u.city) = 'chicago'
+GROUP BY u.city;
+
 
 
 
